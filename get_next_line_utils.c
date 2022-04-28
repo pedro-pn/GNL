@@ -6,22 +6,21 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 21:00:25 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/28 02:41:06 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:34:01 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	size_t	len;
+	size_t	len_s1;
 	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1);
-	len += ft_strlen(s2);
+	len_s1 = ft_strlen(s1);
+	len = len_s1 + ft_strlen(s2);
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -38,6 +37,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s2++;
 	}
 	*str = 0;
+	free(s1 - len_s1);
 	return (str - len);
 }
 
@@ -122,5 +122,5 @@ int	check_line(char *str, ssize_t bytes_read, int call)
 			return (index);
 		index++;
 	}
-	return (0);
+	return (-1);
 }

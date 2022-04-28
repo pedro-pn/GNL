@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 01:53:36 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/27 23:01:31 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:29:00 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define BUFFER_SIZE 1
 # endif
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char const *s2);
 char	*get_line(char *s, int call, size_t len);
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char *s);
