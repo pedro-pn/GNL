@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 01:53:36 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/28 16:29:00 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 19:07:19 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 42
 # endif
 
 char	*ft_strjoin(char *s1, char const *s2);
