@@ -6,12 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/03 18:41:11 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:46:26 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 void	check_buffer(int fd, char *buffer, char ***s_buffer)
 {
@@ -86,28 +85,15 @@ char	*fill_line(char *s_buffer, char **line)
 	return (new_sbuffer);
 }
 
-t_list	*new_node(int fd)
-{
-	t_list	*node;
-	
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node -> fd = fd;
-	node -> next = NULL;
-	node -> s_buffer = NULL;
-	return (node);
-}
-
 void	*get_node(t_list **data, int fd)
 {
 	t_list	*current;
-	
+
 	current = *data;
 	if (current && current->fd == fd)
 		return (current);
 	while (current && current->fd != fd)
-	 	current = current->next;
+		current = current->next;
 	if (!current)
 	{
 		current = new_node(fd);
@@ -116,24 +102,21 @@ void	*get_node(t_list **data, int fd)
 	}
 	return (current);
 }
+
 char	*get_next_line(int fd)
 {
 	static t_list	*data;
 	t_list			*current;
 	char			*line;
-	
-	if (fd < 0 || BUFFER_SIZE < 0 || fd >= 256)
+
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	line = NULL;
 	if (!data)
 		data = new_node(fd);
 	current = get_node(&data, fd);
-	if (!current->s_buffer)
-		fill_buffer(fd, &current->s_buffer);
-	if (current->s_buffer && !ft_strchr(current->s_buffer, '\n'))
-		fill_buffer(fd, &current->s_buffer);
+	fill_buffer(fd, &current->s_buffer);
 	current->s_buffer = fill_line(current->s_buffer, &line);
-//	current->s_buffer = clean_sbuffer(current->s_buffer);
 	if (ft_strlen(line) == 0)
 	{
 		free(line);
@@ -141,4 +124,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
