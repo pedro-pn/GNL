@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 01:53:36 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/03 19:48:34 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:03:57 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_list
 }					t_list;
 
 // From libft
-t_list	*new_node(int fd);
 char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
@@ -38,5 +37,6 @@ void	fill_buffer(int fd, char **s_buffer);
 char	*fill_line(char *s_buffer, char **line);
 void	*get_node(t_list **data, int fd);
 char	*get_next_line(int fd);
+t_list	*new_node(int fd);
 
 #endif

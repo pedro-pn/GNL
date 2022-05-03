@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 21:00:25 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/29 18:38:49 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:36:45 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
@@ -99,18 +99,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-char	*ft_strchr(const char *s, int c)
+t_list	*new_node(int fd)
 {
-	int		counter;
-	int		len_s;
+	t_list	*node;
 
-	counter = 0;
-	len_s = (int) ft_strlen(s);
-	while (counter <= len_s)
-	{
-		if (s[counter] == (unsigned char) c)
-			return (&((char *)s)[counter]);
-		counter++;
-	}
-	return (NULL);
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node -> fd = fd;
+	node -> next = NULL;
+	node -> s_buffer = NULL;
+	return (node);
 }
