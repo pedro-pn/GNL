@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/29 17:37:53 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:40:11 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,40 +56,30 @@ void	fill_buffer(int fd, char **s_buffer)
 	free(buffer);
 }
 
-char	*fill_line(char *s_buffer)
+char	*fill_line(char *s_buffer, char **line)
 {
-	char	*line;
 	int		index;
 	int		l_len;
-
-	if (s_buffer == NULL)
-		return (NULL);
-	index = 0;
-	l_len = 0;
-	while (s_buffer[index] && s_buffer[index] != '\n')
-	{
-		l_len++;
-		index++;
-	}
-	if (s_buffer[index] == '\n')
-		l_len++;
-	line = ft_substr(s_buffer, 0, l_len);
-	return (line);
-}
-
-char	*clean_sbuffer(char *s_buffer)
-{
-	int		index;
 	char	*new_sbuffer;
 
-	index = 0;
-	new_sbuffer = NULL;
 	if (s_buffer == NULL)
 		return (NULL);
-	while (s_buffer[index] != '\n' && s_buffer[index])
-		index++;
+	index = -1;
+	l_len = 0;
+	while (index++, s_buffer[index] && s_buffer[index] != '\n')
+		l_len++;
 	if (s_buffer[index] == '\n')
+		l_len++;
+	*line = malloc(sizeof(char) * l_len + 1);
+	index = -1;
+	while (index++, s_buffer[index] && s_buffer[index] != '\n')
+		(*line)[index] = s_buffer[index];
+	if (s_buffer[index] == '\n')
+	{
+		(*line)[index] = '\n';
 		index++;
+	}
+	(*line)[index] = 0;
 	new_sbuffer = ft_substr(s_buffer, index, ft_strlen(s_buffer) - index);
 	free(s_buffer);
 	return (new_sbuffer);
@@ -100,14 +90,14 @@ char	*get_next_line(int fd)
 	static char	*s_buffer = NULL;
 	char		*line;
 
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	if (!s_buffer)
 		fill_buffer(fd, &s_buffer);
 	if (s_buffer && !ft_strchr(s_buffer, '\n'))
 		fill_buffer(fd, &s_buffer);
-	line = fill_line(s_buffer);
-	s_buffer = clean_sbuffer(s_buffer);
+	s_buffer = fill_line(s_buffer, &line);
 	if (ft_strlen(line) == 0)
 	{
 		free(line);

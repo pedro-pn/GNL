@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 01:53:36 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/29 17:51:48 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:29:14 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -31,7 +32,7 @@ char	*ft_strchr(const char *s, int c);
 // GNL only
 void	check_buffer(int fd, char *buffer, char ***s_buffer);
 void	fill_buffer(int fd, char **s_buffer);
-char	*fill_line(char *s_buffer);
+char	*fill_line(char *s_buffer, char **line);
 char	*clean_sbuffer(char *s_buffer);
 char	*get_next_line(int fd);
 
