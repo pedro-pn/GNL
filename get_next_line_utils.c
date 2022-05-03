@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 21:00:25 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/04/29 18:38:49 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:33:50 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		mem--;
 	}
 	return (sub);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	int		counter;
-	int		len_s;
-
-	counter = 0;
-	len_s = (int) ft_strlen(s);
-	while (counter <= len_s)
-	{
-		if (s[counter] == (unsigned char) c)
-			return (&((char *)s)[counter]);
-		counter++;
-	}
-	return (NULL);
 }

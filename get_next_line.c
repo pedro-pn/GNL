@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/03 18:40:11 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:32:29 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!s_buffer)
-		fill_buffer(fd, &s_buffer);
-	if (s_buffer && !ft_strchr(s_buffer, '\n'))
-		fill_buffer(fd, &s_buffer);
+	fill_buffer(fd, &s_buffer);
 	s_buffer = fill_line(s_buffer, &line);
 	if (ft_strlen(line) == 0)
 	{
