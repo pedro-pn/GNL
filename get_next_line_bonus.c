@@ -6,11 +6,11 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/04 21:10:39 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:02:06 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 void	check_buffer(int fd, char *buffer, char ***s_buffer)
 {
@@ -85,42 +85,20 @@ char	*fill_line(char *s_buffer, char **line)
 	return (new_sbuffer);
 }
 
-void	*get_node(t_list **data, int fd)
-{
-	t_list	*current;
-
-	current = *data;
-	if (current && current->fd == fd)
-		return (current);
-	while (current && current->fd != fd)
-		current = current->next;
-	if (!current)
-	{
-		current = new_node(fd);
-		current->next = *data;
-		*data = current;
-	}
-	return (current);
-}
-
 char	*get_next_line(int fd)
 {
-	static t_list	*data;
-	t_list			*current;
-	char			*line;
+	static char	*s_buffer[1000];
+	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
-		return (NULL);
 	line = NULL;
-	if (!data)
-		data = new_node(fd);
-	current = get_node(&data, fd);
-	fill_buffer(fd, &current->s_buffer);
-	current->s_buffer = fill_line(current->s_buffer, &line);
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	fill_buffer(fd, &s_buffer[fd]);
+	s_buffer[fd] = fill_line(s_buffer[fd], &line);
 	if (ft_strlen(line) == 0)
 	{
 		free(line);
-		free(current->s_buffer);
+		free(s_buffer[fd]);
 		return (NULL);
 	}
 	return (line);

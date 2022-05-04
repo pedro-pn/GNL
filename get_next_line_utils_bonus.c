@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 21:00:25 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/03 19:36:45 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:33:50 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
@@ -97,17 +97,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		mem--;
 	}
 	return (sub);
-}
-
-t_list	*new_node(int fd)
-{
-	t_list	*node;
-
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node -> fd = fd;
-	node -> next = NULL;
-	node -> s_buffer = NULL;
-	return (node);
 }
