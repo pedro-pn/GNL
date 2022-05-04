@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/03 19:46:26 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:10:39 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*get_next_line(int fd)
 	if (ft_strlen(line) == 0)
 	{
 		free(line);
+		free(current->s_buffer);
 		return (NULL);
 	}
 	return (line);
