@@ -6,7 +6,7 @@
 /*   By: ppaulo-d < ppaulo-d@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 00:53:11 by ppaulo-d          #+#    #+#             */
-/*   Updated: 2022/05/04 23:05:30 by ppaulo-d         ###   ########.fr       */
+/*   Updated: 2022/05/05 17:00:24 by ppaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*fill_line(char *s_buffer, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*s_buffer[1024];
+	static char	*s_buffer[257];
 	char		*line;
 
 	line = NULL;
