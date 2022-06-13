@@ -14,8 +14,9 @@
 
 void	check_buffer(int fd, char *buffer, char ***s_buffer)
 {
-	int	index;
-	int	b_read;
+	int		index;
+	int		b_read;
+	char	*temp_sbuffer;
 
 	index = 0;
 	while (buffer[index] && buffer[index] != '\n')
@@ -25,35 +26,46 @@ void	check_buffer(int fd, char *buffer, char ***s_buffer)
 			b_read = read(fd, buffer, BUFFER_SIZE);
 			buffer[b_read] = 0;
 			if (b_read > 0)
-				**s_buffer = ft_strjoin(**s_buffer, buffer);
+			{
+				temp_sbuffer = ft_strdup(**s_buffer);
+				free(**s_buffer);
+				**s_buffer = ft_strjoin(temp_sbuffer, buffer);
+				free(temp_sbuffer);
+			}
 			index = -1;
 		}
 		index++;
 	}
+	free(buffer);
 }
 
 void	fill_buffer(int fd, char **s_buffer)
 {
 	int		b_read;
 	char	*buffer;
+	char	*temp_sbuffer;
 
 	buffer = malloc((BUFFER_SIZE * sizeof(char) + 1));
 	if (buffer == NULL)
 		return ;
 	b_read = read(fd, buffer, BUFFER_SIZE);
-	if (b_read >= 0)
+	if (b_read >= 0 && buffer)
 		buffer[b_read] = 0;
 	else
 	{	
 		free(buffer);
 		return ;
 	}
-	if (*s_buffer == NULL && b_read >= 0)
+	if (*s_buffer == NULL && b_read >= 0 && ft_strlen(buffer))
 		*s_buffer = ft_strdup(buffer);
-	else if (buffer && *s_buffer)
-		*s_buffer = ft_strjoin(*s_buffer, buffer);
+	else if (ft_strlen(buffer) && *s_buffer)
+	{
+		temp_sbuffer = ft_strdup(*s_buffer);
+		free(*s_buffer);
+		*s_buffer = ft_strjoin(temp_sbuffer, buffer);
+		free(temp_sbuffer);
+	}
 	check_buffer(fd, buffer, &s_buffer);
-	free(buffer);
 }
 
 char	*fill_line(char *s_buffer, char **line)
